@@ -1,5 +1,5 @@
 ---
-status: active
+status: archived
 owner: Samsung
 last_verified: 2026-09-23
 verified_commit: "adaptive-task-router-v0.1.0"
@@ -8,6 +8,8 @@ supersedes: []
 ---
 
 # ADR 0001：原生调度与分离的触发入口
+
+此文保留 0.1.0 的历史决策。启用作用域、固定容量及叶子限制已由 [ADR 0002](0002-session-routing.md) 取代，不作为当前执行依据。
 
 ## 背景
 

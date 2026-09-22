@@ -1,0 +1,21 @@
+{
+  "name": "adaptive-task-router",
+  "version": "0.1.0",
+  "description": "按任务难点选择模型与推理等级，协调原生子代理执行、升级与验收。",
+  "author": { "name": "Samsung" },
+  "skills": "./skills/",
+  "keywords": ["task-routing", "subagents", "reasoning", "quality", "任务调度"],
+  "interface": {
+    "displayName": "智能任务调度",
+    "shortDescription": "按子任务选择模型和推理等级，分派执行并验证结果。",
+    "longDescription": "明确调用时分析需求、拆分任务并用合适的模型与推理等级执行；平时仅在多模型分工明显有益时先询问是否启用。包含依赖协调、失败升级、独立复核和真实调用记录。使用 Codex 原生子代理能力。",
+    "developerName": "Samsung",
+    "category": "Productivity",
+    "capabilities": ["Interactive", "Write"],
+    "defaultPrompt": [
+      "请使用 $route-task 分析并完成下面的任务，按子任务选择合适的模型和推理等级。",
+      "请使用 $route-task 只分析任务、依赖、选型和验收方案，暂不执行。",
+      "请使用 $suggest-task-routing 判断本任务是否值得启用多模型调度，只给建议。"
+    ]
+  }
+}

@@ -25,6 +25,21 @@ require(manifest["version"].split("+")[0] == "0.2.0", "unexpected release versio
 require(manifest.get("skills") == "./skills/", "skills discovery path differs")
 require(not any(k in manifest for k in ("apps", "mcpServers")), "unexpected runtime dependency")
 
+marketplace = json.loads((ROOT / ".agents/plugins/marketplace.json").read_text(encoding="utf-8"))
+require(marketplace.get("name") == "adaptive-task-router", "public marketplace identity differs")
+entries = marketplace.get("plugins", [])
+require(len(entries) == 1, "public marketplace must expose exactly this plugin")
+if len(entries) == 1:
+    entry = entries[0]
+    require(entry.get("name") == manifest["name"], "marketplace/plugin identity differs")
+    require(entry.get("source") == {
+        "source": "url", "url": "https://github.com/wei-er582/adaptive-task-router.git", "ref": "main"
+    }, "public source must resolve to the repository root")
+    require(entry.get("policy") == {"installation": "AVAILABLE", "authentication": "ON_INSTALL"},
+            "unexpected installation policy")
+    require(entry.get("category") == "Productivity", "unexpected marketplace category")
+require((ROOT / "LICENSE").read_text(encoding="utf-8").startswith("MIT License"), "missing MIT license")
+
 for name, implicit in (("route-task", False), ("suggest-task-routing", True)):
     folder = ROOT / "skills" / name
     ui = yaml.safe_load((folder / "agents/openai.yaml").read_text(encoding="utf-8"))

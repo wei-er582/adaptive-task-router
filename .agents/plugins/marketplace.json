@@ -1,0 +1,21 @@
+{
+  "name": "adaptive-task-router",
+  "interface": {
+    "displayName": "Adaptive Task Router"
+  },
+  "plugins": [
+    {
+      "name": "adaptive-task-router",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/wei-er582/adaptive-task-router.git",
+        "ref": "main"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

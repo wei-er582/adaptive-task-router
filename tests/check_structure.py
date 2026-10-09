@@ -73,10 +73,10 @@ for path in sorted(ROOT.rglob("*.md")):
         link_count += 1
 
 reference = (ROOT / "skills/route-task/references/model-routing.md").read_text(encoding="utf-8")
-combinations = re.findall(r"\| `(gpt-6-(?:astra|sol|luna))` \| `(\w+)` \|", reference)
-expected = {(f"gpt-6-{model}", effort) for model in ("astra", "sol", "luna")
+combinations = re.findall(r"\| `(gpt-6-(?:astra|luna)|gpt-6\.1-sol)` \| `(\w+)` \|", reference)
+expected = {(model, effort) for model in ("gpt-6-astra", "gpt-6.1-sol", "gpt-6-luna")
             for effort in ("low", "medium", "high", "xhigh", "max")}
-expected |= {("gpt-6-astra", "ultra"), ("gpt-6-sol", "ultra")}
+expected |= {("gpt-6-astra", "ultra"), ("gpt-6.1-sol", "ultra")}
 require(len(combinations) == 17 and set(combinations) == expected, "17-option coverage differs")
 
 print(json.dumps({"passed": not failures, "documents": document_count,
